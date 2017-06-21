@@ -35,7 +35,7 @@ int main() {
 	int rdm = rand() % (goals.size()-1);
 	oLd << " " << x << ". "<< goals[rdm] << std::endl;
 	x++;
-	}*/
+	}
 	std::ifstream main("newdata.txt");
 	vector<string> g;
 	string l;
