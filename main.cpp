@@ -1,4 +1,3 @@
-#pragma warning (disable:4267)
 #include <thread>
 #include <iostream>
 #include "StandardEntries.hpp"

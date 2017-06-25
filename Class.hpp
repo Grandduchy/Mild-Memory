@@ -27,25 +27,29 @@ void DataEntries::addEntries(std::vector<string>&vec) {
 }
 std::vector<string> DataEntries::returnEntries(const int& entry_count) const {
 	std::default_random_engine eng(time(0));
-	std::uniform_int_distribution<int> roll(0, sESize  + ( !new_entries ? new_entries->size() :  0  )     );
+	std::uniform_int_distribution<int> roll(1, sESize  + ( new_entries == nullptr ? 0 :  new_entries->size()  )     );
 	std::vector<string> return_entry;
-	for (int x = entry_count; x != 0; x--) {
+	for (int x = entry_count; x > 0; x--) {
 		int rn = roll(eng);
 		try {
 			if (rn <= sESize) {
-				if (std::find(return_entry.begin(), return_entry.end(), entries->at(rn)) == return_entry.end())
-					return_entry.push_back(entries->at(rn));
+				if (std::find(return_entry.begin(), return_entry.end(), entries->at(rn-1)) == return_entry.end())//here
+					return_entry.push_back(entries->at(rn-1));
 				else
 					x--;
 			}
 			else {
-				if (std::find(return_entry.begin(), return_entry.end(), new_entries->at(rn)) == return_entry.end())
-					return_entry.push_back(new_entries->at(rn));
+				if (std::find(return_entry.begin(), return_entry.end(), new_entries->at(rn-1)) == return_entry.end())
+					return_entry.push_back(new_entries->at(rn-1));
 				else
 					x--;
 			}
 		}
-		catch (std::exception& e) { std::cout << e.what() << std::endl; }
+		catch (std::exception& e) { 
+			rn = roll(eng); //retry with different values
+			int x = entry_count - return_entry.size();
+			continue;
+		}
 		
 	}
 	return return_entry;

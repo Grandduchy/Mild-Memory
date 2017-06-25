@@ -77,7 +77,7 @@ void runProgram() {
 	}
 	vector<string> y = data.returnEntries(amount);
 	
-	cout << "Make sure these entries are ok to use, (1) for good, (2) for poor entries" << endl;
+	cout << "Make sure these entries are ok to use, (1) for good, (2) to reroll entries" << endl;
 	while (true) {
 		outputEntries(y);
 		int n = check<int>("Only enter numbers", "Only enter 1 for good, 2 for bad", [](const int& i) {
